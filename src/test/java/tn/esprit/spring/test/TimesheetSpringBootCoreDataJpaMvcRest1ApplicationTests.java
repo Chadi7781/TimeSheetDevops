@@ -71,8 +71,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 	public void affecterDepartementAEntrepriseTest() {
 		
 		
-		Integer depid  =1;
-		Integer entrid  =1;
+		Integer depid  =2;	Integer entrid  =1;
 		es.affecterDepartementAEntreprise(depid,entrid);
 		List<String> deps=(List<String>)es.getAllDepartementsNamesByEntreprise(entrid);
 		
