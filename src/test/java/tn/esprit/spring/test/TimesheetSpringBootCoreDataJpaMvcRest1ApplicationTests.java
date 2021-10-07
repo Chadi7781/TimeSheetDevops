@@ -51,7 +51,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 	@Test
 	public void testAffecterContratAEmployet() {
 
-		employeServiceImpl.affecterContratAEmploye(5, 1); //contrat id = 5, employe id= 1
+		employeServiceImpl.affecterContratAEmploye(1, 5); //contrat id = 1, employe id= 5
 		Employe employe = employeRepoistory.findById(1).get(); 
 		int idContrat = employe.getContrat().getReference();
 		assertEquals(4, idContrat);
@@ -61,13 +61,13 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 //yasmine
 	@Test
 	public void TestDeleteContratById() {
-		Contrat contrat = contratRepoistory.findById(5).get();
+		Contrat contrat = contratRepoistory.findById(1).get();
 		
 		
 		if(contrat.getReference()!=0) {
 	    	
-			employeServiceImpl.deleteContratById(5);
-			assertThat(employeRepoistory.existsById(5)).isFalse();//confirmer que le contrat est suprimer
+			employeServiceImpl.deleteContratById(1);
+			assertThat(employeRepoistory.existsById(1)).isFalse();//confirm that employe has beeen deleted
 	    	 }
 	    	 else {
 	    		 assertNull(contrat);
@@ -85,4 +85,3 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 	}
 
 }
-
