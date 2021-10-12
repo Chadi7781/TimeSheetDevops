@@ -43,7 +43,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 	
 	@Autowired
 	DepartementRepository dr;
-	
+
 	@Test
 	@Order(1)
 	 public void ajouterEntrepriseTest() {
@@ -64,16 +64,19 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 		Assert.assertNotNull(dens2);
 		System.out.println("done 2");
 	}
-	
+
 	@Test
 	@Order(3)
-
 	public void affecterDepartementAEntrepriseTest() {
 		
+		Entreprise e1=new Entreprise("infoo","Cite El Ghazela");
+		Departement dep2=new Departement("RH2" );
+
+		es.ajouterEntreprise(e1);
+		es.ajouterDepartement(dep2);
 		
-		Integer depid  =2;	Integer entrid  =1;
-		es.affecterDepartementAEntreprise(depid,entrid);
-		List<String> deps=(List<String>)es.getAllDepartementsNamesByEntreprise(entrid);
+		es.affecterDepartementAEntreprise(dep2.getId(),e1.getId());
+		List<String> deps=(List<String>)es.getAllDepartementsNamesByEntreprise(e1.getId());
 		
 		
 		assertThat(deps).size().isGreaterThan(0);
@@ -81,28 +84,37 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 
 	}
 
-	
+
 	@Test
 	@Order(4)
 
 public void getAllDepartementsNamesByEntrepriseTest() {
-	List<String> deps=(List<String>) es.getAllDepartementsNamesByEntreprise(1);
+		Entreprise e1=new Entreprise("infoo","Cite El Ghazela");
+		Departement dep2=new Departement("RH2" );
+
+		es.ajouterEntreprise(e1);
+		es.ajouterDepartement(dep2);
+		
+		es.affecterDepartementAEntreprise(dep2.getId(),e1.getId());
+		
+	List<String> deps=(List<String>) es.getAllDepartementsNamesByEntreprise(e1.getId());
 	assertThat(deps).size().isGreaterThan(0);
 	System.out.println("done 4");
 
 }
 	 
 	
-	
+
 
 	@Test
 	@Order(5)
 
 	public void getEntrepriseByIdTest() {
-		Integer identreprise=1;
+		Entreprise e1=new Entreprise("SSII Consulting","Cite El Ghazela");
+
+		es.ajouterEntreprise(e1);
 		
-		
-		Assert.assertNotNull(es.getEntrepriseById(identreprise));
+		Assert.assertNotNull(es.getEntrepriseById(e1.getId()));
 
 		System.out.println("done 5");
 
@@ -112,11 +124,13 @@ public void getAllDepartementsNamesByEntrepriseTest() {
 	@Order(6)
 
 	public void deleteDepartementById() {
-		Integer iddep=1;
-		boolean existBeforeDelete =dr.findById(iddep) .isPresent();
+		Departement dep2=new Departement("RH" );
+		es.ajouterDepartement(dep2);
 
-		es.deleteDepartementById(iddep);
-		boolean existAfterDelete =dr.findById(iddep) .isPresent();
+		boolean existBeforeDelete =dr.findById(dep2.getId()) .isPresent();
+
+		es.deleteDepartementById(dep2.getId());
+		boolean existAfterDelete =dr.findById(dep2.getId()) .isPresent();
 		
 		assertTrue(existBeforeDelete);
 		assertFalse(existAfterDelete);
@@ -129,11 +143,13 @@ public void getAllDepartementsNamesByEntrepriseTest() {
 	@Order(7)
 
 	public void deleteEntrepriseById() {
-		Integer identreprise=1;
-		boolean existBeforeDelete =er.findById(identreprise) .isPresent();
+		Entreprise e1=new Entreprise("SSII Consulting","Cite El Ghazela");
+		es.ajouterEntreprise(e1);
 
-		es.deleteEntrepriseById(identreprise);
-		boolean existAfterDelete =er.findById(identreprise) .isPresent();
+		boolean existBeforeDelete =er.findById(e1.getId()) .isPresent();
+
+		es.deleteEntrepriseById(e1.getId());
+		boolean existAfterDelete =er.findById(e1.getId()) .isPresent();
 		
 		assertTrue(existBeforeDelete);
 		assertFalse(existAfterDelete);
@@ -143,6 +159,6 @@ public void getAllDepartementsNamesByEntrepriseTest() {
 		
 	}
 	
-	
+ 
 
 }
