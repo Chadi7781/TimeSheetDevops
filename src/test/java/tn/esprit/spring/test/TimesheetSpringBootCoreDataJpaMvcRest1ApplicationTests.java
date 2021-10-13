@@ -1,17 +1,19 @@
 package tn.esprit.spring.test;
 
 
-
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import org.apache.logging.log4j.LogManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
+import lombok.extern.slf4j.Slf4j;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.repository.EmployeRepository;
@@ -34,6 +37,7 @@ import tn.esprit.spring.services.EmployeServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
+@Slf4j
 public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 
 	@Autowired
@@ -45,6 +49,8 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
      public void contextLoads() {
 
      }
+     
+     Logger log = (Logger) LogManager.getLogger(EmployeServiceImpl.class);
 
 
      
@@ -59,11 +65,11 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
         employee.setPrenom("devEmp1");
         employee.setRole(Role.INGENIEUR);
         employee.setActif(true);
-
-        System.out.println("*****************Helloo**********");
-    
-        assertNotNull(EmployeServiceImpl.ajouterEmploye(employee));
         
+        assertNotNull(EmployeServiceImpl.ajouterEmploye(employee));
+      log.info("Employee added with success");
+       
+   
     }
     
     @Test
@@ -75,25 +81,38 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
     		  EmployeServiceImpl.mettreAjourEmailByEmployeId(employee.getEmail(),employee.getId());
     		  assertNotEquals(employee.getEmail()
  	        		 ,"ram@gmail.com");
+    		  log.info("Employee updated with success");
 
     	 }
     	 else {
     		 assertNull(employee);
+    	      log.warning("Updated : Employee not found ");
+
     	 }
        
     }
     @Test
     public void testDeleteEmployeById () {
-    	 Employe employee = employeRepo.findById(4).get();
-
-    	 if(employee.getId()!=0) {
     	
-		EmployeServiceImpl.deleteEmployeById(4);
-		assertThat(employeRepo.existsById(1)).isFalse();
-    	 }
-    	 else {
-    		 assertNull(employee);
-    	 }
+    	Employe employee = new Employe();
+        employee.setEmail("employedelted@gmail.com");
+        employee.setNom("deletedEmpNom");
+        employee.setPrenom("deletedEmpPrenom");
+        employee.setRole(Role.INGENIEUR);
+        employee.setActif(true);
+        EmployeServiceImpl.ajouterEmploye(employee);
+       if(employeRepo.findById(employee.getId()).isPresent()) {
+    	   EmployeServiceImpl.deleteEmployeById(employee.getId());
+    	   assertTrue(true);
+ 		  log.info("Employee deleted with success");
+
+       }
+       else {
+    	   assertTrue(false);
+ 		  log.info("Delete : Employee not found  success");
+
+       }
+
 	}
     
     @Test
@@ -104,12 +123,14 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
         assertEquals("devEmp1", 
         		EmployeServiceImpl.getEmployePrenomById(5)
         		);
+        log.info( "Employe Prenom : "+EmployeServiceImpl.getEmployePrenomById(5));
     }
 
     @Test
     public void testGetNombreEmploye() {
 		assertNotEquals(0, EmployeServiceImpl.getNombreEmployeJPQL());
 
+		log.info("number employee : "+EmployeServiceImpl.getNombreEmployeJPQL());
     }
 
   
