@@ -9,6 +9,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertNotEquals;
 
+import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +25,7 @@ import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EntrepriseRepository;
+import tn.esprit.spring.services.EntrepriseServiceImpl;
 import tn.esprit.spring.services.IEmployeService;
 import tn.esprit.spring.services.IEntrepriseService;
 
@@ -32,6 +34,8 @@ import tn.esprit.spring.services.IEntrepriseService;
 @RunWith(SpringRunner.class)
 @SpringBootTest (classes={TimesheetSpringBootCoreDataJpaMvcRest1Application.class})
 public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
+	private static final Logger l = Logger.getLogger(EntrepriseServiceImpl.class);
+
  
 	@Autowired 
 	IEmployeService em;
@@ -50,7 +54,10 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 		Entreprise e1=new Entreprise("SSII Consulting","Cite El Ghazela");
 
 		int eens1=es.ajouterEntreprise(e1);
+		
+	
 		Assert.assertNotNull(eens1);
+		 l.info("Entreprise "+e1.getName()+" successfully added ");
 		System.out.println("done 1");
 	 }
 
@@ -62,6 +69,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 
 		int dens2=es.ajouterDepartement(dep2);
 		Assert.assertNotNull(dens2);
+		 l.info("Departement"+dep2.getName()+" successfully added");
 		System.out.println("done 2");
 	}
 
@@ -80,6 +88,9 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 		
 		
 		assertThat(deps).size().isGreaterThan(0);
+		
+		 l.info(dep2.getName()+" departement successfully affected to  "+dep2.getName()+" entreprise.");
+
 		System.out.println("done 3");
 
 	}
@@ -94,11 +105,12 @@ public void getAllDepartementsNamesByEntrepriseTest() {
 
 		es.ajouterEntreprise(e1);
 		es.ajouterDepartement(dep2);
-		
 		es.affecterDepartementAEntreprise(dep2.getId(),e1.getId());
 		
 	List<String> deps=(List<String>) es.getAllDepartementsNamesByEntreprise(e1.getId());
 	assertThat(deps).size().isGreaterThan(0);
+	 l.info(" departement List  " +deps);
+
 	System.out.println("done 4");
 
 }
@@ -113,8 +125,8 @@ public void getAllDepartementsNamesByEntrepriseTest() {
 		Entreprise e1=new Entreprise("SSII Consulting","Cite El Ghazela");
 
 		es.ajouterEntreprise(e1);
-		
 		Assert.assertNotNull(es.getEntrepriseById(e1.getId()));
+		 l.error("Entreprise not found");
 
 		System.out.println("done 5");
 
@@ -134,6 +146,8 @@ public void getAllDepartementsNamesByEntrepriseTest() {
 		
 		assertTrue(existBeforeDelete);
 		assertFalse(existAfterDelete);
+		 l.info("Departement successfully Deleted");
+
 		System.out.println("done 6");
 
 		
@@ -153,6 +167,8 @@ public void getAllDepartementsNamesByEntrepriseTest() {
 		
 		assertTrue(existBeforeDelete);
 		assertFalse(existAfterDelete);
+		 l.info("Entreprise successfully deleted");
+
 		System.out.println("done 7");
 
 

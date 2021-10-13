@@ -17,7 +17,7 @@ import tn.esprit.spring.repository.EntrepriseRepository;
 
 @Service
 public class EntrepriseServiceImpl implements IEntrepriseService {
-	private static final Logger l = Logger.getLogger(EntrepriseServiceImpl.class);
+	//private static final Logger l = Logger.getLogger(EntrepriseServiceImpl.class);
 	@Autowired
     EntrepriseRepository entrepriseRepoistory;
 	@Autowired
@@ -25,14 +25,14 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	
 	public int ajouterEntreprise(Entreprise entreprise) {
 		entrepriseRepoistory.save(entreprise);
-		l.info("Entreprise added " +entreprise.getName());
+		//l.info("Entreprise added " +entreprise.getName());
 		
 		return entreprise.getId();
 	}
 
 	public int ajouterDepartement(Departement dep) {
 		deptRepoistory.save(dep);
-		l.info("departement added " +dep.getName());
+	//	l.info("departement added " +dep.getName());
 		return dep.getId();
 	}
 	
@@ -48,11 +48,11 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 				
 				depManagedEntity.setEntreprise(entrepriseManagedEntity);
 				deptRepoistory.save(depManagedEntity);
-				l.info("Entreprise :" +entrepriseManagedEntity.getName()+"\n Departement : "+depManagedEntity.getName());
+				//l.info("Entreprise :" +entrepriseManagedEntity.getName()+"\n Departement : "+depManagedEntity.getName());
 		
 				} catch (Exception e) {
 					// TODO: handle exception
-					l.error("entreprise / departement  not found");
+					//l.error("entreprise / departement  not found");
 
 					
 				}
@@ -64,7 +64,7 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 
 		for(Departement dep : entrepriseManagedEntity.getDepartements()){
 			depNames.add(dep.getName());
-			l.info("departement" +dep.getName());
+			//l.info("departement" +dep.getName());
 		}
 		
 		return depNames;
@@ -73,20 +73,20 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	@Transactional
 	public void deleteEntrepriseById(int entrepriseId) {
 		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());	
-		l.info("Entreprise deleted");
+		//l.info("Entreprise deleted");
 
 	}
 
 	@Transactional
 	public void deleteDepartementById(int depId) {
 		deptRepoistory.delete(deptRepoistory.findById(depId).get());	
-		l.info("Departement deleted");
+		//l.info("Departement deleted");
 	}
 
 
 	public Entreprise getEntrepriseById(int entrepriseId) {
 		
-		l.info("Entreprise Found :");
+		//l.info("Entreprise Found :");
 		return entrepriseRepoistory.findById(entrepriseId).get();	
 
 	}
