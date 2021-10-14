@@ -11,9 +11,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
-import org.apache.logging.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
-import lombok.extern.slf4j.Slf4j;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.repository.EmployeRepository;
@@ -37,7 +35,6 @@ import tn.esprit.spring.services.EmployeServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
-@Slf4j
 public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 
 	@Autowired
@@ -50,7 +47,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 
      }
      
-     Logger log = (Logger) LogManager.getLogger(EmployeServiceImpl.class);
+ final static Logger log = Logger.getLogger(EmployeServiceImpl.class);
 
 
      
@@ -86,7 +83,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
     	 }
     	 else {
     		 assertNull(employee);
-    	      log.warning("Updated : Employee not found ");
+    	      log.warn("Updated : Employee not found ");
 
     	 }
        
