@@ -51,3 +51,8 @@
 2021-10-13 20:21:49.022  INFO 9768 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2021-10-13 20:21:49.024  INFO 9768 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2021-10-13 20:21:49.028  INFO 9768 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-10-13 22:39:58.860  INFO 6192 --- [RMI TCP Connection(613)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-10-13 22:39:58.882  INFO 6192 --- [RMI TCP Connection(613)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-13 22:39:58.886  INFO 6192 --- [RMI TCP Connection(613)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-10-13 22:39:58.911  INFO 6192 --- [RMI TCP Connection(613)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-10-13 22:39:58.918  INFO 6192 --- [RMI TCP Connection(613)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

@@ -55,8 +55,9 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 
 		int eens1=es.ajouterEntreprise(e1);
 		
+		assertThat(eens1).isNotNull();  
 	
-		Assert.assertNotNull(eens1);
+
 		 l.info("Entreprise "+e1.getName()+" successfully added ");
 		System.out.println("done 1");
 	 }
@@ -68,7 +69,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 		Departement dep2=new Departement("RH" );
 
 		int dens2=es.ajouterDepartement(dep2);
-		Assert.assertNotNull(dens2);
+		assertThat(dens2).isNotNull();  
 		 l.info("Departement"+dep2.getName()+" successfully added");
 		System.out.println("done 2");
 	}
@@ -87,7 +88,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 		List<String> deps=(List<String>)es.getAllDepartementsNamesByEntreprise(e1.getId());
 		
 		
-		assertThat(deps).size().isGreaterThan(0);
+		assertThat(deps).size().isPositive();
 		
 		 l.info(dep2.getName()+" departement successfully affected to  "+dep2.getName()+" entreprise.");
 
@@ -108,7 +109,7 @@ public void getAllDepartementsNamesByEntrepriseTest() {
 		es.affecterDepartementAEntreprise(dep2.getId(),e1.getId());
 		
 	List<String> deps=(List<String>) es.getAllDepartementsNamesByEntreprise(e1.getId());
-	assertThat(deps).size().isGreaterThan(0);
+	assertThat(deps).size().isPositive();
 	 l.info(" departement List  " +deps);
 
 	System.out.println("done 4");
