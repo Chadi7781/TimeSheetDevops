@@ -2,35 +2,26 @@ package tn.esprit.spring.test;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.client.HttpClientErrorException;
 
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Role;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.EmployeServiceImpl;
+import tn.esprit.spring.services.TimesheetServiceImpl;
 
 
 @RunWith(SpringRunner.class)
@@ -38,16 +29,18 @@ import tn.esprit.spring.services.EmployeServiceImpl;
 public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 
 	@Autowired
-	EmployeServiceImpl EmployeServiceImpl;
+	EmployeServiceImpl employeServiceImpl1;
 
 	@Autowired
 	EmployeRepository employeRepo;
+	
      @Test
      public void contextLoads() {
+    		//Context Load init for test Methods
 
      }
      
- final static Logger log = Logger.getLogger(EmployeServiceImpl.class);
+ final  Logger log = Logger.getLogger(TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests.class);
 
 
      
@@ -63,7 +56,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
         employee.setRole(Role.INGENIEUR);
         employee.setActif(true);
         
-        assertNotNull(EmployeServiceImpl.ajouterEmploye(employee));
+        assertNotNull(employeServiceImpl1.ajouterEmploye(employee));
       log.info("Employee added with success");
        
    
@@ -71,12 +64,12 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
     
     @Test
     public void mettreAjourEmailByEmployeId() {
-    	 Employe employee = employeRepo.findById(4).get();
-
-    	 if(employee.getId()!=0) {
+      	Employe employee = new Employe();
+      	employee.setId(7);
+        if(employee.getId()!=0) {
     		  employee.setEmail("ram@gmail.com");
-    		  EmployeServiceImpl.mettreAjourEmailByEmployeId(employee.getEmail(),employee.getId());
-    		  assertNotEquals(employee.getEmail()
+    		  employeServiceImpl1.mettreAjourEmailByEmployeId(employee.getEmail(),employee.getId());
+    		  assertEquals(employee.getEmail()
  	        		 ,"ram@gmail.com");
     		  log.info("Employee updated with success");
 
@@ -97,9 +90,9 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
         employee.setPrenom("deletedEmpPrenom");
         employee.setRole(Role.INGENIEUR);
         employee.setActif(true);
-        EmployeServiceImpl.ajouterEmploye(employee);
+        employeServiceImpl1.ajouterEmploye(employee);
        if(employeRepo.findById(employee.getId()).isPresent()) {
-    	   EmployeServiceImpl.deleteEmployeById(employee.getId());
+    	   employeServiceImpl1.deleteEmployeById(employee.getId());
     	   assertTrue(true);
  		  log.info("Employee deleted with success");
 
@@ -118,16 +111,16 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
         employee.setId(5);
         
         assertEquals("devEmp1", 
-        		EmployeServiceImpl.getEmployePrenomById(5)
+        		employeServiceImpl1.getEmployePrenomById(5)
         		);
-        log.info( "Employe Prenom : "+EmployeServiceImpl.getEmployePrenomById(5));
+        log.info( "Employe Prenom : "+employeServiceImpl1.getEmployePrenomById(5));
     }
 
     @Test
     public void testGetNombreEmploye() {
-		assertNotEquals(0, EmployeServiceImpl.getNombreEmployeJPQL());
+		assertNotEquals(0, employeServiceImpl1.getNombreEmployeJPQL());
 
-		log.info("number employee : "+EmployeServiceImpl.getNombreEmployeJPQL());
+		log.info("number employee : "+employeServiceImpl1.getNombreEmployeJPQL());
     }
 
   

@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
@@ -32,16 +32,24 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	@Autowired
 	EmployeRepository employeRepository;
 	
+	 final static Logger log = Logger.getLogger(TimesheetServiceImpl.class);
+
 	public int ajouterMission(Mission mission) {
 		missionRepository.save(mission);
 		return mission.getId();
 	}
     
 	public void affecterMissionADepartement(int missionId, int depId) {
-		Mission mission = missionRepository.findById(missionId).get();
-		Departement dep = deptRepoistory.findById(depId).get();
-		mission.setDepartement(dep);
-		missionRepository.save(mission);
+		if( missionRepository.findById(missionId).isPresent()) {
+			Mission mission = missionRepository.findById(missionId).get();
+			
+			Departement dep = deptRepoistory.findById(depId).get();
+			mission.setDepartement(dep);
+			missionRepository.save(mission);
+		}
+		else 
+			log.info("not found mission id");
+	
 		
 	}
 

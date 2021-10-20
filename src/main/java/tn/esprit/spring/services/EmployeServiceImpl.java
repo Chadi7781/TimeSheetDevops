@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,9 @@ public class EmployeServiceImpl implements IEmployeService {
 	ContratRepository contratRepoistory;
 	@Autowired
 	TimesheetRepository timesheetRepository;
+	
+	private   final Logger log = Logger.getLogger(EmployeServiceImpl.class);
+
 
 	public int ajouterEmploye(Employe employe) {
 		employeRepository.save(employe);
@@ -37,42 +41,71 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
-		Employe employe = employeRepository.findById(employeId).get();
-		employe.setEmail(email);
-		employeRepository.save(employe);
+		if(employeRepository.findById(employeId).isPresent()) {
+			
+			if(employeRepository.findById(employeId).isPresent()) {
+				Employe employe = employeRepository.findById(employeId).get();
+				employe.setEmail(email);
+				employeRepository.save(employe);			
+			}
+
+		}
+		else {
+			log.info("employee id not found");
+		}
+	
 
 	}
 
 	@Transactional	
 	public void affecterEmployeADepartement(int employeId, int depId) {
-		Departement depManagedEntity = deptRepoistory.findById(depId).get();
-		Employe employeManagedEntity = employeRepository.findById(employeId).get();
+		
+		if(deptRepoistory.findById(depId).isPresent() ){
+			Departement depManagedEntity = deptRepoistory.findById(depId).get();
+		
+			if(employeRepository.findById(employeId).isPresent()){
+				Employe employeManagedEntity = employeRepository.findById(employeId).get();
 
-		if(depManagedEntity.getEmployes() == null){
+				if(depManagedEntity.getEmployes() == null){
 
-			List<Employe> employes = new ArrayList<>();
-			employes.add(employeManagedEntity);
-			depManagedEntity.setEmployes(employes);
-		}else{
+					List<Employe> employes = new ArrayList<>();
+					employes.add(employeManagedEntity);
+					depManagedEntity.setEmployes(employes);
+				}else{
 
-			depManagedEntity.getEmployes().add(employeManagedEntity);
+					depManagedEntity.getEmployes().add(employeManagedEntity);
 
-		}
+				}
+			}
 
+			}
 	}
+
+		
+			
+		
+		
+	
 	@Transactional
 	public void desaffecterEmployeDuDepartement(int employeId, int depId)
 	{
-		Departement dep = deptRepoistory.findById(depId).get();
+		
+		if(deptRepoistory.findById(depId).isPresent()){
+			
 
-		int employeNb = dep.getEmployes().size();
-		for(int index = 0; index < employeNb; index++){
-			if(dep.getEmployes().get(index).getId() == employeId){
-				dep.getEmployes().remove(index);
-				break;//a revoir
-			}
+			Departement dep = deptRepoistory.findById(depId).get();
+
+			int employeNb = dep.getEmployes().size();
+			for(int index = 0; index < employeNb; index++){
+				if(dep.getEmployes().get(index).getId() == employeId){
+					dep.getEmployes().remove(index);
+					break;//a revoir
+				}
+			}			
 		}
-	}
+		}
+
+	
 
 	public int ajouterContrat(Contrat contrat) {
 		contratRepoistory.save(contrat);
@@ -94,21 +127,38 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 	public void deleteEmployeById(int employeId)
 	{
-		Employe employe = employeRepository.findById(employeId).get();
+		
+		if(employeRepository.findById(employeId).isPresent()) {
+			Employe employe = employeRepository.findById(employeId).get();
 
-		//Desaffecter l'employe de tous les departements
-		//c'est le bout master qui permet de mettre a jour
-		//la table d'association
-		for(Departement dep : employe.getDepartements()){
-			dep.getEmployes().remove(employe);
+			
+			for(Departement dep : employe.getDepartements()){
+				dep.getEmployes().remove(employe);
+			}
+
+			employeRepository.delete(employe);
 		}
-
-		employeRepository.delete(employe);
+		else {
+			log.info("employe id not found");
+		
+		}
+		
+		
 	}
 
 	public void deleteContratById(int contratId) {
-		Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
-		contratRepoistory.delete(contratManagedEntity);
+		
+		if(contratRepoistory.findById(contratId).isPresent()) {
+			
+			
+			Contrat contratManagedEntity = contratRepoistory.findById(contratId).get();
+			contratRepoistory.delete(contratManagedEntity);
+		}
+		else {
+			log.info("Contrat id not found");
+		
+		}
+		
 
 	}
 
