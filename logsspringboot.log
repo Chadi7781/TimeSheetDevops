@@ -1963,3 +1963,69 @@ Caused by: java.net.ConnectException: Connection refused: connect
 2021-10-06 07:04:53.345  INFO 20400 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2021-10-06 07:04:53.347  INFO 20400 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2021-10-06 07:04:53.349  INFO 20400 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-10-28 21:25:48.809  INFO 11832 --- [main] gBootCoreDataJpaMvcRest1ApplicationTests : Starting TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests on DESKTOP-B3OMMUN with PID 11832 (started by Yamine in C:\Users\Yamine\OneDrive\Documents\GitHub\TimeSheetDevops)
+2021-10-28 21:25:48.812  INFO 11832 --- [main] gBootCoreDataJpaMvcRest1ApplicationTests : No active profile set, falling back to default profiles: default
+2021-10-28 21:25:49.639  INFO 11832 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-10-28 21:25:49.739  INFO 11832 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 88ms. Found 6 repository interfaces.
+2021-10-28 21:25:50.162  INFO 11832 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$271b29a4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-28 21:25:50.414  INFO 11832 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-10-28 21:25:50.611  INFO 11832 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-10-28 21:25:50.686  INFO 11832 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2021-10-28 21:25:50.819  INFO 11832 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.9.Final}
+2021-10-28 21:25:50.820  INFO 11832 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2021-10-28 21:25:50.997  INFO 11832 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2021-10-28 21:25:51.325  INFO 11832 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-10-28 21:25:52.484  INFO 11832 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-10-28 21:25:52.863  INFO 11832 --- [main] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2021-10-28 21:25:54.141  INFO 11832 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-28 21:25:54.248  WARN 11832 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-28 21:25:54.981  INFO 11832 --- [main] gBootCoreDataJpaMvcRest1ApplicationTests : Started TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests in 6.557 seconds (JVM running for 7.726)
+2021-10-28 21:25:55.096  INFO 11832 --- [main] t.e.spring.services.ContratServiceImpl   : In  Contrat have as reference : 0
+2021-10-28 21:25:55.303  INFO 11832 --- [main] t.e.spring.services.ContratServiceImpl   : Method execution time: 0 milliseconds.
+2021-10-28 21:25:55.303  INFO 11832 --- [main] t.e.spring.services.ContratServiceImpl   : RetrieveAllContrat list is here
+2021-10-28 21:25:55.308  INFO 11832 --- [main] t.e.spring.services.ContratServiceImpl   : In  Contrat have as reference : 1
+2021-10-28 21:25:55.312  INFO 11832 --- [main] t.e.spring.services.ContratServiceImpl   : Method execution time: 0 milliseconds.
+2021-10-28 21:25:55.312  INFO 11832 --- [main] t.e.spring.services.ContratServiceImpl   : Contrat By Id list is here
+2021-10-28 21:25:55.317  INFO 11832 --- [main] t.e.spring.services.ContratServiceImpl   : In  ajouterContrat : tn.esprit.spring.entities.Contrat@fde487b
+2021-10-28 21:25:55.352  INFO 11832 --- [main] t.e.spring.services.ContratServiceImpl   : Out  ajouterContrat : 
+2021-10-28 21:25:55.353  INFO 11832 --- [main] t.e.spring.services.ContratServiceImpl   : Method execution time: 0 milliseconds.
+2021-10-28 21:25:55.353  INFO 11832 --- [main] t.e.spring.services.ContratServiceImpl   : Ajout Contrat list is here
+2021-10-28 21:25:55.361  INFO 11832 --- [Thread-2] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-28 21:25:55.363  INFO 11832 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-10-28 21:25:55.366  INFO 11832 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-10-28 21:25:55.373  INFO 11832 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-10-28 21:26:30.607  INFO 19304 --- [main] gBootCoreDataJpaMvcRest1ApplicationTests : Starting TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests on DESKTOP-B3OMMUN with PID 19304 (started by Yamine in C:\Users\Yamine\OneDrive\Documents\GitHub\TimeSheetDevops)
+2021-10-28 21:26:30.609  INFO 19304 --- [main] gBootCoreDataJpaMvcRest1ApplicationTests : No active profile set, falling back to default profiles: default
+2021-10-28 21:26:31.517  INFO 19304 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2021-10-28 21:26:31.638  INFO 19304 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 109ms. Found 6 repository interfaces.
+2021-10-28 21:26:32.165  INFO 19304 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ec1d9687] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-10-28 21:26:32.483  INFO 19304 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-10-28 21:26:32.712  INFO 19304 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-10-28 21:26:32.808  INFO 19304 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2021-10-28 21:26:32.981  INFO 19304 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.9.Final}
+2021-10-28 21:26:32.983  INFO 19304 --- [main] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2021-10-28 21:26:33.173  INFO 19304 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2021-10-28 21:26:33.557  INFO 19304 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-10-28 21:26:34.706  INFO 19304 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-10-28 21:26:35.107  INFO 19304 --- [main] o.h.h.i.QueryTranslatorFactoryInitiator  : HHH000397: Using ASTQueryTranslatorFactory
+2021-10-28 21:26:36.178  INFO 19304 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-28 21:26:36.254  WARN 19304 --- [main] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-10-28 21:26:36.873  INFO 19304 --- [main] gBootCoreDataJpaMvcRest1ApplicationTests : Started TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests in 6.636 seconds (JVM running for 7.714)
+2021-10-28 21:26:36.950  INFO 19304 --- [main] t.e.spring.services.ContratServiceImpl   : In  Contrat have as reference : 0
+2021-10-28 21:26:37.089  INFO 19304 --- [main] t.e.spring.services.ContratServiceImpl   : Method execution time: 0 milliseconds.
+2021-10-28 21:26:37.089  INFO 19304 --- [main] t.e.spring.services.ContratServiceImpl   : RetrieveAllContrat list is here
+2021-10-28 21:26:37.093  INFO 19304 --- [main] t.e.spring.services.ContratServiceImpl   : In  Contrat have as reference : 1
+2021-10-28 21:26:37.095  INFO 19304 --- [main] t.e.spring.services.ContratServiceImpl   : Method execution time: 0 milliseconds.
+2021-10-28 21:26:37.096  INFO 19304 --- [main] t.e.spring.services.ContratServiceImpl   : Contrat By Id list is here
+2021-10-28 21:26:37.100  INFO 19304 --- [main] t.e.spring.services.ContratServiceImpl   : In  ajouterContrat : tn.esprit.spring.entities.Contrat@75b363c3
+2021-10-28 21:26:37.135  INFO 19304 --- [main] t.e.spring.services.ContratServiceImpl   : Out  ajouterContrat : 
+2021-10-28 21:26:37.135  INFO 19304 --- [main] t.e.spring.services.ContratServiceImpl   : Method execution time: 0 milliseconds.
+2021-10-28 21:26:37.135  INFO 19304 --- [main] t.e.spring.services.ContratServiceImpl   : Ajout Contrat list is here
+2021-10-28 21:26:37.144  INFO 19304 --- [Thread-2] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-28 21:26:37.147  INFO 19304 --- [Thread-2] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-10-28 21:26:37.149  INFO 19304 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-10-28 21:26:37.155  INFO 19304 --- [Thread-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

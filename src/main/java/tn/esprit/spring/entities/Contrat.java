@@ -39,7 +39,8 @@ public class Contrat implements Serializable {
 		this.typeContrat = typeContrat;
 		this.salaire = salaire;
 	}
-
+	 public Contrat(int i, Date date, String prenom, int s) {
+	    }
 
 	public Date getDateDebut() {
 		return dateDebut;
