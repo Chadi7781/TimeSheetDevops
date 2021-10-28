@@ -1,14 +1,11 @@
 package tn.esprit.spring.test;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
-
 
 import java.util.Date;
 
@@ -17,7 +14,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.test.context.junit4.SpringRunner;
 
 import tn.esprit.spring.aop.TrackTime;
@@ -28,11 +24,11 @@ import tn.esprit.spring.repository.ContratRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.EmployeServiceImpl;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest()
-public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
+public class EmployeServiceImplTest {
 
+	
 	@Autowired
 	EmployeServiceImpl employeServiceImpl1;
 
@@ -50,10 +46,9 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 
      }
      
- final  Logger log = Logger.getLogger(TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests.class);
+ final  Logger log = Logger.getLogger(EmployeServiceImplTest.class);
     @Test
     @TrackTime(message = "testCreateEmployee ")
-
     public void testCreateEmployee() {
     	Employe employee = new Employe();
         employee.setEmail("employe1@gmail.com");
@@ -152,5 +147,5 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 		log.info("getSalaireByEmployeIdJPQL == " + salaire);
 		assertThat(salaire).isEqualTo(5000);
 	}
-  
+ 
 }
