@@ -84,14 +84,13 @@ public class RestControlEmploye {
 
 	
    
-   // URL : http://localhost:8081/SpringMVC/servlet/getEmployePrenomById/2
    @GetMapping(value = "getEmployePrenomById/{idemp}")
    @ResponseBody
+
    public String getEmployePrenomById(@PathVariable("idemp")int employeId) {
 		return iemployeservice.getEmployePrenomById(employeId);
 	}
 
-    // URL : http://localhost:8081/SpringMVC/servlet/deleteEmployeById/1
     @DeleteMapping("/deleteEmployeById/{idemp}") 
 	@ResponseBody 
 	public void deleteEmployeById(@PathVariable("idemp")int employeId) {
@@ -99,7 +98,6 @@ public class RestControlEmploye {
 		
 	}
     
- // URL : http://localhost:8081/SpringMVC/servlet/deleteContratById/2
     @DeleteMapping("/deleteContratById/{idcontrat}") 
 	@ResponseBody
 	public void deleteContratById(@PathVariable("idcontrat")int contratId) {
@@ -107,7 +105,6 @@ public class RestControlEmploye {
 	}
 
     
-    // URL : http://localhost:8081/SpringMVC/servlet/getNombreEmployeJPQL
     @GetMapping(value = "getNombreEmployeJPQL")
     @ResponseBody
 	public int getNombreEmployeJPQL() {
@@ -115,23 +112,22 @@ public class RestControlEmploye {
 		return iemployeservice.getNombreEmployeJPQL();
 	}
 
-    // URL : http://localhost:8081/SpringMVC/servlet/getAllEmployeNamesJPQL
     @GetMapping(value = "getAllEmployeNamesJPQL")
     @ResponseBody
+
 	public List<String> getAllEmployeNamesJPQL() {
 		
 		return iemployeservice.getAllEmployeNamesJPQL();
 	}
 
-    // URL : http://localhost:8081/SpringMVC/servlet/getAllEmployeByEntreprise/1
     @GetMapping(value = "getAllEmployeByEntreprise/{identreprise}")
     @ResponseBody
+
 	public List<Employe> getAllEmployeByEntreprise(@PathVariable("identreprise") int identreprise) {
     	Entreprise entreprise=ientrepriseservice.getEntrepriseById(identreprise);
 		return iemployeservice.getAllEmployeByEntreprise(entreprise);
 	}
 
- // Modifier email : http://localhost:8081/SpringMVC/servlet/mettreAjourEmailByEmployeIdJPQL/2/newemail
  	@PutMapping(value = "/mettreAjourEmailByEmployeIdJPQL/{id}/{newemail}") 
  	@ResponseBody
 	public void mettreAjourEmailByEmployeIdJPQL(@PathVariable("newemail") String email, @PathVariable("id") int employeId) {	
@@ -147,16 +143,16 @@ public class RestControlEmploye {
 		
 	}
 
-    // URL : http://localhost:8081/SpringMVC/servlet/getSalaireByEmployeIdJPQL/2
     @GetMapping(value = "getSalaireByEmployeIdJPQL/{idemp}")
     @ResponseBody
+
 	public float getSalaireByEmployeIdJPQL(@PathVariable("idemp")int employeId) {
 		return iemployeservice.getSalaireByEmployeIdJPQL(employeId);
 	}
 
-    // URL : http://localhost:8081/SpringMVC/servlet/getSalaireMoyenByDepartementId/2
     @GetMapping(value = "getSalaireMoyenByDepartementId/{iddept}")
     @ResponseBody
+
 	public Double getSalaireMoyenByDepartementId(@PathVariable("iddept")int departementId) {
 		return iemployeservice.getSalaireMoyenByDepartementId(departementId);
 	}
@@ -169,9 +165,9 @@ public class RestControlEmploye {
 	}
 
 
-	 // URL : http://localhost:8081/SpringMVC/servlet/getAllEmployes
 	@GetMapping(value = "/getAllEmployes")
     @ResponseBody
+
 	public List<Employe> getAllEmployes() {
 		
 		return iemployeservice.getAllEmployes();

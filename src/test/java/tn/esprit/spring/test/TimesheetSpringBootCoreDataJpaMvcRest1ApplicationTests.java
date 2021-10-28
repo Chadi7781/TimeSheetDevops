@@ -1,13 +1,16 @@
 package tn.esprit.spring.test;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
@@ -17,8 +20,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import org.springframework.test.context.junit4.SpringRunner;
 
+import tn.esprit.spring.aop.TrackTime;
+import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Role;
+import tn.esprit.spring.repository.ContratRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.EmployeServiceImpl;
 
@@ -33,6 +39,11 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 	@Autowired
 	EmployeRepository employeRepo;
 	
+	@Autowired
+	ContratRepository contratRepository;
+	
+	private Employe employe;
+	
      @Test
      public void contextLoads() {
     		//Context Load init for test Methods
@@ -40,13 +51,9 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
      }
      
  final  Logger log = Logger.getLogger(TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests.class);
-
-
-     
-    
-	// http://localhost:8081/SpringMVC/servlet/ajouterEmployer
-
     @Test
+    @TrackTime(message = "testCreateEmployee ")
+
     public void testCreateEmployee() {
     	Employe employee = new Employe();
         employee.setEmail("employe1@gmail.com");
@@ -62,6 +69,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
     }
     
     @Test
+    @TrackTime(message = "mettreAjourEmailByEmployeId ")
     public void mettreAjourEmailByEmployeId() {
       	Employe employee = new Employe();
       	employee.setId(7);
@@ -81,6 +89,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
        
     }
     @Test
+    @TrackTime(message = "testDeleteEmployeById ")
     public void testDeleteEmployeById () {
     	
     	Employe employee = new Employe();
@@ -105,6 +114,7 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 	}
     
     @Test
+    @TrackTime(message = "testGetEmployeById ")
     public void testGetEmployeById() {
     	Employe employee = new Employe();
         employee.setId(5);
@@ -116,11 +126,31 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
     }
 
     @Test
+    @TrackTime(message = "testGetNombreEmploye ")
+
     public void testGetNombreEmploye() {
 		assertNotEquals(0, employeServiceImpl1.getNombreEmployeJPQL());
 
 		log.info("number employee : "+employeServiceImpl1.getNombreEmployeJPQL());
     }
 
+    @Test
+    @TrackTime(message = "getSalaireByEmployeIdJPQLTest ")
+
+    public void getSalaireByEmployeIdJPQLTest() {
+		employe = new Employe("Chef", "BenFoulen", "chef@gmail.com", true, Role.INGENIEUR);
+     assertNotNull(employeServiceImpl1.ajouterEmploye(employe));
+
+     
+
+		Contrat contrat = new Contrat(new Date(2021, 01, 05), "TypeCont", 5000);
+		
+		contrat.setEmploye(employe);
+		contratRepository.save(contrat);
+     
+		float salaire = employeServiceImpl1.getSalaireByEmployeIdJPQL(employe.getId());
+		log.info("getSalaireByEmployeIdJPQL == " + salaire);
+		assertThat(salaire).isEqualTo(5000);
+	}
   
 }
