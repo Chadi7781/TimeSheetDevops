@@ -45,6 +45,7 @@ public class ContratServiceImplTest {
 		Contrat contrat1;
 
 		@Before
+		@Test
 		public void setUp() {
 			
 
@@ -59,23 +60,15 @@ public class ContratServiceImplTest {
 			   log.info(" test ajout"+contrat1.getReference()+" Contrat terminé");
 		}
 
-		@After
-		public void tearDown() {
-			contratRepoistory.deleteAll();
 		
-		}
+		  @After public void tearDown() { contratRepoistory.deleteAll();
+		  
+		  }
+		 
 	
+
 		@Test
 		@Order(1)
-		public void ajouterContratTest() {
-			Contrat savedcontrat = new Contrat(new Date(), "CDI", 500);
-			contratService.ajouterContrat(savedcontrat);
-			assertThat(savedcontrat.getReference()).isPositive();
-			 System.out.println("done 1");
-		}
-		
-		@Test
-		@Order(2)
 		public void RetrieveAllContratTest() {
 			List<Contrat> listContrats = contratService.getAllContrats();
 
@@ -85,7 +78,7 @@ public class ContratServiceImplTest {
 		        System.out.println("done 2");
 		}
 		@Test
-		@Order(3)
+		@Order(2)
 		public void getContratById() {
 			  try{
 			Contrat contratretrieved = contratService.getContratById(contrat1.getReference());
@@ -105,7 +98,7 @@ public class ContratServiceImplTest {
 			}
 		
 		  @Test
-		  @Order(4)
+		  @Order(3)
 		    public void deleteContratById()  {
 			  try {
 					contratService.deleteById(contrat1.getReference());
