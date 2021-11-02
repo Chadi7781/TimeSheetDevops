@@ -7,11 +7,16 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,19 +31,21 @@ import tn.esprit.spring.services.EmployeServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest()
-public class EmployeServiceImplTest {
+public class EmployeServiceImplTest implements AbstractBaseTest {
 
 	
 	@Autowired
 	EmployeServiceImpl employeServiceImpl1;
 
 	@Autowired
+	@Mock
 	EmployeRepository employeRepo;
 	
 	@Autowired
 	ContratRepository contratRepository;
 	
-	private Employe employe;
+	private Employe employeA,employeB,employeC,employe;
+	private Contrat contrat;
 	
      @Test
      public void contextLoads() {
@@ -50,14 +57,10 @@ public class EmployeServiceImplTest {
     @Test
     @TrackTime(message = "testCreateEmployee ")
     public void testCreateEmployee() {
-    	Employe employee = new Employe();
-        employee.setEmail("employe1@gmail.com");
-        employee.setNom("devEmp");
-        employee.setPrenom("devEmp1");
-        employee.setRole(Role.INGENIEUR);
-        employee.setActif(true);
-        
-        assertNotNull(employeServiceImpl1.ajouterEmploye(employee));
+    
+		employe = new Employe("Zied", "aloulo", "zied@gmail.com", true, Role.ADMINISTRATEUR);
+
+        assertNotNull(employeServiceImpl1.ajouterEmploye(employe));
       log.info("Employee added with success");
        
    
@@ -114,8 +117,8 @@ public class EmployeServiceImplTest {
     	Employe employee = new Employe();
         employee.setId(5);
         
-        assertEquals("devEmp1", 
-        		employeServiceImpl1.getEmployePrenomById(5)
+        assertEquals("Chadi", 
+        		employeServiceImpl1.getEmployePrenomById(employeA.getId())
         		);
         log.info( "Employe Prenom : "+employeServiceImpl1.getEmployePrenomById(5));
     }
@@ -133,19 +136,55 @@ public class EmployeServiceImplTest {
     @TrackTime(message = "getSalaireByEmployeIdJPQLTest ")
 
     public void getSalaireByEmployeIdJPQLTest() {
-		employe = new Employe("Chef", "BenFoulen", "chef@gmail.com", true, Role.INGENIEUR);
-     assertNotNull(employeServiceImpl1.ajouterEmploye(employe));
 
-     
-
-		Contrat contrat = new Contrat(new Date(2021, 01, 05), "TypeCont", 5000);
-		
-		contrat.setEmploye(employe);
-		contratRepository.save(contrat);
-     
-		float salaire = employeServiceImpl1.getSalaireByEmployeIdJPQL(employe.getId());
+       
+		float salaire = employeServiceImpl1.getSalaireByEmployeIdJPQL(employeA.getId());
 		log.info("getSalaireByEmployeIdJPQL == " + salaire);
 		assertThat(salaire).isEqualTo(5000);
+	}
+
+    
+    
+    
+   
+	@Override
+	@Before
+	public void baseSetUp() {
+
+		employeA = new Employe("Troudi", "Chadi", "chadi@gmail.com", false, Role.INGENIEUR);		
+		employeB = new Employe("Ali", "aloune", "ali@gmail.com", true, Role.ADMINISTRATEUR);
+		employeC = new Employe("Foulen", "benFoulen", "foulen@gmail.com", true, Role.CHEF_DEPARTEMENT);
+	
+		
+		List<Employe> employeList = new ArrayList<>();
+		    employeList.add(employeA);
+		    employeList.add(employeB);
+		    employeList.add(employeC);
+		    
+	
+		employeRepo.saveAll(employeList);
+		
+		
+
+		 contrat = new Contrat(new Date(2021, 01, 05), "TypeCont", 5000);
+		
+		contrat.setEmploye(employeA);
+		contratRepository.save(contrat);
+	}
+
+	@Override
+	@After
+	public void baseTearDown() {
+		employeRepo.delete(employeA);
+		employeRepo.delete(employeB);
+		employeRepo.delete(employeA);
+		employeRepo.delete(employe);
+		//Deuxieme methode
+		//employeRepo.deleteAll();
+		contratRepository.deleteAll();
+		
+		
+		
 	}
  
 }
