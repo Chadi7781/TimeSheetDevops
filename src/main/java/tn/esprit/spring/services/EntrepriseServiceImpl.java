@@ -84,9 +84,10 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	public Entreprise getEntrepriseById(int entrepriseId) {
 		Optional <Entreprise> entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId);
 
-		if(entrepriseManagedEntity.isPresent()) {
-			entrepriseManagedEntity.get();
-		}
+		if(entrepriseManagedEntity.isPresent()) 
+
+			return entrepriseManagedEntity.get();
+		
  		return entrepriseManagedEntity.get();	
  		
  		
