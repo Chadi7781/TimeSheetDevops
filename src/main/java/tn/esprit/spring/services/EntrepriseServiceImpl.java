@@ -18,9 +18,11 @@ import tn.esprit.spring.repository.EntrepriseRepository;
 public class EntrepriseServiceImpl implements IEntrepriseService {
  	@Autowired
     EntrepriseRepository entrepriseRepoistory;
+ 	@Autowired
+    IEntrepriseService ents;
 	@Autowired
 	DepartementRepository deptRepoistory;
-	
+ 
 	public int ajouterEntreprise(Entreprise entreprise) {
 		entrepriseRepoistory.save(entreprise);
  		
@@ -60,21 +62,34 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	@Transactional
 	public void deleteEntrepriseById(int entrepriseId) {
 		
-	 
+		Optional <Entreprise> entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId);
+
+		if(entrepriseManagedEntity.isPresent()) {
+			entrepriseRepoistory.delete(entrepriseManagedEntity.get());
+		}
 		
-		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());	
  
 	}
 
 	@Transactional
 	public void deleteDepartementById(int depId) {
-		deptRepoistory.delete(deptRepoistory.findById(depId).get());	
+		Optional <Departement> depManagedEntity = deptRepoistory.findById(depId);
+		if(depManagedEntity.isPresent()) {
+			deptRepoistory.delete(depManagedEntity.get());
+		}
+		 
  	}
 
 
 	public Entreprise getEntrepriseById(int entrepriseId) {
-		
- 		return entrepriseRepoistory.findById(entrepriseId).get();	
+		Optional <Entreprise> entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId);
+
+		if(entrepriseManagedEntity.isPresent()) {
+			entrepriseManagedEntity.get();
+		}
+ 		return entrepriseManagedEntity.get();	
+ 		
+ 		
 
 	}
 
