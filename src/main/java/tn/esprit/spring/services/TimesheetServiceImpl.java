@@ -99,7 +99,8 @@ public class TimesheetServiceImpl implements ITimesheetService {
 		
 		//Comment Lire une date de la base de données
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		log.info("dateDebut : " + dateFormat.format(timesheet.getTimesheetPK().getDateDebut()));
+		String date =  dateFormat.format(timesheet.getTimesheetPK().getDateDebut());
+		log.info(date);
 	}
 
 	}

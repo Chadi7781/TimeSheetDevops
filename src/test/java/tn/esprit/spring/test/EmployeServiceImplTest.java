@@ -8,6 +8,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -44,21 +45,21 @@ public class EmployeServiceImplTest implements AbstractBaseTest {
 	@Autowired
 	ContratRepository contratRepository;
 	
-	private Employe employeA,employeB,employeC,employe;
-	private Contrat contrat;
-	
+	private Employe employe1;
+
      @Test
      public void contextLoads() {
     		//Context Load init for test Methods
 
      }
      
+     
  final  Logger log = Logger.getLogger(EmployeServiceImplTest.class);
     @Test
     @TrackTime(message = "testCreateEmployee ")
     public void testCreateEmployee() {
     
-		employe = new Employe("Zied", "aloulo", "zied@gmail.com", true, Role.ADMINISTRATEUR);
+		Employe employe = new Employe("Zied", "aloulo", "zied@gmail.com", true, Role.ADMINISTRATEUR);
 
         assertNotNull(employeServiceImpl1.ajouterEmploye(employe));
       log.info("Employee added with success");
@@ -118,7 +119,7 @@ public class EmployeServiceImplTest implements AbstractBaseTest {
         employee.setId(5);
         
         assertEquals("Chadi", 
-        		employeServiceImpl1.getEmployePrenomById(employeA.getId())
+        		employeServiceImpl1.getEmployePrenomById(employe1.getId())
         		);
         log.info( "Employe Prenom : "+employeServiceImpl1.getEmployePrenomById(5));
     }
@@ -138,7 +139,7 @@ public class EmployeServiceImplTest implements AbstractBaseTest {
     public void getSalaireByEmployeIdJPQLTest() {
 
        
-		float salaire = employeServiceImpl1.getSalaireByEmployeIdJPQL(employeA.getId());
+		float salaire = employeServiceImpl1.getSalaireByEmployeIdJPQL(employe1.getId());
 		log.info("getSalaireByEmployeIdJPQL == " + salaire);
 		assertThat(salaire).isEqualTo(5000);
 	}
@@ -150,38 +151,39 @@ public class EmployeServiceImplTest implements AbstractBaseTest {
 	@Override
 	@Before
 	public void baseSetUp() {
+		employe1 = new Employe("Troudi", "Chadi", "chadi@gmail.com", false, Role.INGENIEUR);		
+		Employe employe2 = new Employe("Ali", "aloune", "ali@gmail.com", true, Role.ADMINISTRATEUR);
+		Employe employe3 = new Employe("Foulen", "benFoulen", "foulen@gmail.com", true, Role.CHEF_DEPARTEMENT);
+		Employe employe = new Employe("Foulen", "benFoulen", "foulen@gmail.com", true, Role.CHEF_DEPARTEMENT);
 
-		employeA = new Employe("Troudi", "Chadi", "chadi@gmail.com", false, Role.INGENIEUR);		
-		employeB = new Employe("Ali", "aloune", "ali@gmail.com", true, Role.ADMINISTRATEUR);
-		employeC = new Employe("Foulen", "benFoulen", "foulen@gmail.com", true, Role.CHEF_DEPARTEMENT);
-	
 		
 		List<Employe> employeList = new ArrayList<>();
-		    employeList.add(employeA);
-		    employeList.add(employeB);
-		    employeList.add(employeC);
+		    employeList.add(employe);	
+		    employeList.add(employe1);	
+
+		    employeList.add(employe2);
+		    employeList.add(employe3);
 		    
 	
 		employeRepo.saveAll(employeList);
 		
-		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2021);
+		cal.set(Calendar.MONTH, Calendar.MARCH);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		Date dateRepresentation = cal.getTime();
 
-		 contrat = new Contrat(new Date(2021, 01, 05), "TypeCont", 5000);
+		Contrat	 contrat = new Contrat(dateRepresentation, "TypeCont", 5000);
 		
-		contrat.setEmploye(employeA);
+		contrat.setEmploye(employe1);
 		contratRepository.save(contrat);
 	}
 
 	@Override
 	@After
 	public void baseTearDown() {
-		employeRepo.delete(employeA);
-		employeRepo.delete(employeB);
-		employeRepo.delete(employeA);
-		employeRepo.delete(employe);
+		employeRepo.deleteAll();
 		//Deuxieme methode
-		//employeRepo.deleteAll();
-		contratRepository.deleteAll();
 		
 		
 		
