@@ -1,6 +1,7 @@
 package tn.esprit.spring.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -52,7 +53,7 @@ public class RestControlEntreprise {
     
     @GetMapping(value = "getEntrepriseById/{identreprise}")
     @ResponseBody
-	public Entreprise getEntrepriseById(@PathVariable("identreprise") int entrepriseId) {
+	public Optional<Entreprise> getEntrepriseById(@PathVariable("identreprise") int entrepriseId) {
 
 		return ientrepriseservice.getEntrepriseById(entrepriseId);
 	}

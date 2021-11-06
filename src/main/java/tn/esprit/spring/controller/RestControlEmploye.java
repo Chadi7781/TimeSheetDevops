@@ -1,7 +1,9 @@
 package tn.esprit.spring.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.web.bind.annotation.DeleteMapping;
@@ -117,8 +119,13 @@ public class RestControlEmploye {
     @GetMapping(value = "getAllEmployeByEntreprise/{identreprise}")
     @ResponseBody
 	public List<Employe> getAllEmployeByEntreprise(@PathVariable("identreprise") int identreprise) {
-    	Entreprise entreprise=ientrepriseservice.getEntrepriseById(identreprise);
-		return iemployeservice.getAllEmployeByEntreprise(entreprise);
+    	Optional<Entreprise> entreprise=ientrepriseservice.getEntrepriseById(identreprise);
+    	List<Employe> employes = new ArrayList<>();
+    	if(entreprise.isPresent()) {
+    		
+    		employes=iemployeservice.getAllEmployeByEntreprise(entreprise.get());
+    	}
+		return employes;
 	}
 
  	@PutMapping(value = "/mettreAjourEmailByEmployeIdJPQL/{id}/{newemail}") 
