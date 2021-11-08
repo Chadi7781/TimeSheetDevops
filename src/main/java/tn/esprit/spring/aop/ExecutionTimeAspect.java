@@ -32,7 +32,7 @@ public class ExecutionTimeAspect {
         TrackTime measured = method.getAnnotation(TrackTime.class);
         String message = measured.message();
         if (Strings.isEmpty(message))
-            log.debug("Method {} execution: {} ms", joinPoint.getSignature().toShortString(), executionTime);
+            log.debug("Method {} execution: {} ms",message , executionTime);
         else
             log.debug("{}: {} ms", message, executionTime);
         return proceed;
