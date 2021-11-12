@@ -1,44 +1,62 @@
 pipeline {
-       agent any
-     
-stages{
-       stage('Checkout GIT'){
-       steps{
-             echo 'Pulling...';
-             git branch: 'chaditroudi',
-            url : 'https://github.com/Chadi7781/TimeSheetDevops.git';
-             }
-         }
-         
-         stage("Test,Build"){
-          steps{
-          bat """mvn clean package -Dmaven.test.failure.ignore=true"""
-          }
-          }
-          
-          stage("Sonar"){
-          steps{
-          bat """mvn sonar:sonar"""
-          }
-          }
-          
-          stage("Nexus"){
-          steps{
-          bat """mvn clean package -Dmaven.test.failure.ignore=true deploy -DaltDeploymentRepository=deploymentRepo::default::file:/"""
-          }
-          }
-     
+    agent any
 
-       
-       
-          
+    stages {
+        stage('Checkout Git') {
+            steps {
+                echo 'Pulling ...'
+                git branch: 'chaditroudi', url: 'https://github.com/Chadi7781/TimeSheetDevops'
+            }
         }
-      post {
-    always {
-       mail to: 'troudishedy6@gmail.com',
-          subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
-          body: "${env.BUILD_URL} has result ${currentBuild.result}"
-    }
-  }
-      
+        
+         stage('Build Project ') {
+       
+       steps{
+           echo "Building ..."
+           bat 'mvn package '
        }
+    }
+    
+     stage('JUnit  Test ') {
+       
+       steps{
+           echo "Test ..."
+           bat 'mvn test '
+       }
+    }
+    
+        stage('Sonar ') {
+       
+       steps{
+           echo "Analyzing quality code -sonar"
+           bat 'mvn sonar:sonar '
+       }
+    }
+    
+    
+      stage('Nexus ') {
+       
+       steps{
+           echo "delivrable artefacts."
+           bat 'mvn clean package deploy:deploy-file -DgroupId=tn.esprit.spring -DartifactId=Timesheet -Dversion=2.0 -DgeneratePom=true -Dpackaging=jar -DrepositoryId=deploymentRepo -Durl=http://localhost:8081/repository/maven-releases/  -Dfile=target/Timesheet-2.0.jar '
+       }
+    }
+    
+    
+       
+    }
+    
+    
+     post {  
+       
+      failure {
+        
+mail bcc: '',          body: "${env.BUILD_URL} has result ${currentBuild.result}"
+, cc: '', from: '', replyTo: '', subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+, to: 'troudishedy6@gmail.comm'
+     } 
+     
+     }
+     
+}
+
