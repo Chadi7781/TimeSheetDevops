@@ -52,7 +52,7 @@ pipeline {
       failure {
         
 mail bcc: '',          body: "${env.BUILD_URL} has result ${currentBuild.result}"
-, cc: '', from: '', replyTo: '', subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+, cc: '', from: '', replyTo: '', subject: "Status of pipeline: ${currentBuild.fullDisplayName}"
 , to: 'troudishedy6@gmail.comm'
      } 
      
