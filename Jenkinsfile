@@ -52,8 +52,7 @@ pipeline {
        
       failure {
         
-mail bcc: '',          body: "${env.BUILD_URL} has result ${currentBuild.result}", subject: "Status of pipeline: ${currentBuild.fullDisplayName}"
-, to: 'troudishedy6@gmail.com'
+mail bcc: '',          body: "${env.BUILD_URL} has result ${currentBuild.result}", subject: "Status of pipeline: ${currentBuild.fullDisplayName}", to: 'troudishedy6@gmail.com'
      } 
      
      }
