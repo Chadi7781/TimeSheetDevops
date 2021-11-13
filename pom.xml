@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>tn.esprit.spring</groupId>
 	<artifactId>Timesheet-spring-boot-core-data-jpa-mvc-REST-1</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>4.0</version>
 	<packaging>war</packaging>
 	<name>Timesheet-spring-boot-core-data-jpa-mvc-REST-1</name>
 	<description>Timesheet-spring-boot-core-data-jpa-mvc-REST-1</description>
@@ -21,6 +21,11 @@
 	</properties>
 
 	<dependencies>
+	<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+    </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -41,6 +46,12 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
+    <groupId>org.assertj</groupId>
+    <artifactId>assertj-core</artifactId>
+    <version>3.13.2</version>
+    <scope>test</scope>
+</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
@@ -58,6 +69,26 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				  <groupId>org.jacoco</groupId>
+				  <artifactId>jacoco-maven-plugin</artifactId>
+				  <version>0.8.6</version>
+				   <executions>
+				  	<execution>
+				      	<id>prepare-agent</id>
+				            <goals>
+				             <goal>prepare-agent</goal>
+				            </goals>
+				      </execution>
+				      <execution>
+				            <id>report</id>
+				            <phase>test</phase>
+				               <goals>
+				               <goal>report</goal>
+				               </goals>
+				        </execution>
+				    </executions>
+				</plugin>
 		</plugins>
 	</build>
 

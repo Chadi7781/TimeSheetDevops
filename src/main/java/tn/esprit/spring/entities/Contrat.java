@@ -40,7 +40,6 @@ public class Contrat implements Serializable {
 		this.salaire = salaire;
 	}
 
-
 	public Date getDateDebut() {
 		return dateDebut;
 	}
@@ -80,6 +79,7 @@ public class Contrat implements Serializable {
 	public void setEmploye(Employe employe) {
 		this.employe = employe;
 	}
-	
+
+
 	
 }
