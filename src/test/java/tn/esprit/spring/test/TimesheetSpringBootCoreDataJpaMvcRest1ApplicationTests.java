@@ -49,11 +49,6 @@ public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
 	DepartementRepository dr;
 
 	
-	   @Test
-	     public void contextLoads() {
-	    		//Context Load init for test Methods
-
-	     }
 	@Test
 	@Order(1)
 	 public void ajouterEntrepriseTest() {
