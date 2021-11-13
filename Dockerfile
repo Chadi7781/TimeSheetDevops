@@ -1,7 +1,7 @@
-FROM jdk-maven-ant-tomcat-mysql
+FROM dquintela/openjdk-8-jdk-alpine
 
 ADD target/Timesheet-2.0.jar timesheet.jar
 
 ENTRYPOINT ["java","-jar","timesheet.jar"]
 
-EXPOSE 8080
+EXPOSE 8081
