@@ -11,7 +11,7 @@ import tn.esprit.spring.repository.ContratRepository;
 @Service
 public class ContratServiceImpl implements IContratService {
 
-
+/*
 	@Autowired
 	ContratRepository contratRepository;
 	
@@ -33,4 +33,6 @@ public class ContratServiceImpl implements IContratService {
 		Contrat contrat = new Contrat();
 		contratRepository.delete(getContratById(contrat.getReference()));
 	}
+	
+	*/
 }

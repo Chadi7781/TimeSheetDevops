@@ -1,9 +1,9 @@
 package tn.esprit.spring.services;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,11 +41,12 @@ public class EmployeServiceImpl implements IEmployeService {
 		if(employe.isPresent()) {
 		employe.get().setEmail(email);
 		employeRepository.save(employe.get());
-		}
+	}
 	}
 
 	@Transactional	
 	public void affecterEmployeADepartement(int employeId, int depId) {
+		
 		Optional <Departement> depManagedEntity = deptRepoistory.findById(depId);
 		Optional <Employe> employeManagedEntity = employeRepository.findById(employeId);
 
@@ -62,6 +63,7 @@ public class EmployeServiceImpl implements IEmployeService {
 		}
 		
 		}
+		
 
 	}
 	@Transactional
@@ -79,6 +81,7 @@ public class EmployeServiceImpl implements IEmployeService {
 				}
 			}
 		}
+		
 	}
 
 	public int ajouterContrat(Contrat contrat) {
@@ -95,11 +98,12 @@ public class EmployeServiceImpl implements IEmployeService {
 		contratManagedEntity.get().setEmploye(employeManagedEntity.get());
 		contratRepoistory.save(contratManagedEntity.get());
 		}
+		
 	}
 
 	public String getEmployePrenomById(int employeId) {
 		Optional <Employe> employeManagedEntity = employeRepository.findById(employeId);
-		
+	
 		if(employeManagedEntity.isPresent()) {
 			
 		return employeManagedEntity.get().getPrenom();}
@@ -111,17 +115,17 @@ public class EmployeServiceImpl implements IEmployeService {
 	{
 		Optional <Employe>  employe = employeRepository.findById(employeId);
 
-		 if(employe.isPresent()) {
-				for(Departement dep : employe.get().getDepartements()){
-					dep.getEmployes().remove(employe.get());
-				}
+ if(employe.isPresent()) {
+		for(Departement dep : employe.get().getDepartements()){
+			dep.getEmployes().remove(employe.get());
+		}
 
-				employeRepository.delete(employe.get());
-			}
+		employeRepository.delete(employe.get());
+	}
 	}
 
 	public void deleteContratById(int contratId) {
-Optional <Contrat> contratManagedEntity = contratRepoistory.findById(contratId);
+		Optional <Contrat> contratManagedEntity = contratRepoistory.findById(contratId);
 		
 		if(contratManagedEntity.isPresent()) {
 		contratRepoistory.delete(contratManagedEntity.get());
