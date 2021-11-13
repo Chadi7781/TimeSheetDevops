@@ -4,13 +4,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -30,6 +30,7 @@ import tn.esprit.spring.repository.ContratRepository;
 import tn.esprit.spring.repository.EmployeRepository;
 import tn.esprit.spring.services.EmployeServiceImpl;
 
+
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 public class EmployeServiceImplTest implements AbstractBaseTest {
@@ -46,6 +47,9 @@ public class EmployeServiceImplTest implements AbstractBaseTest {
 	ContratRepository contratRepository;
 	
 	private Employe employe1;
+	
+	private static String mail = "chaditroudi@gmail.com";
+
 
      @Test
      public void contextLoads() {
@@ -69,25 +73,14 @@ public class EmployeServiceImplTest implements AbstractBaseTest {
     
     @Test
     @TrackTime(message = "mettreAjourEmailByEmployeId ")
-    public void mettreAjourEmailByEmployeId() {
-      	Employe employee = new Employe();
-      	employee.setId(7);
-        if(employee.getId()!=0) {
-    		  employee.setEmail("ram@gmail.com");
-    		  employeServiceImpl1.mettreAjourEmailByEmployeId(employee.getEmail(),employee.getId());
-    		  assertEquals(employee.getEmail()
- 	        		 ,"ram@gmail.com");
-    		  log.info("Employee updated with success");
-
-    	 }
-    	 else {
-    		 assertNull(employee);
-    	      log.warn("Updated : Employee not found ");
-
-    	 }
-       
-    }
-    @Test
+	public void mettreAjourEmailByEmployeIdTest() {
+		employeServiceImpl1.mettreAjourEmailByEmployeId(mail, employe1.getId());
+		Optional<Employe> e = employeRepo.findById(employe1.getId());
+		if (e.isPresent()) {
+			assertThat(e.get().getEmail()).isEqualTo(mail);
+		}
+	}
+  @Test
     @TrackTime(message = "testDeleteEmployeById ")
     public void testDeleteEmployeById () {
     	
