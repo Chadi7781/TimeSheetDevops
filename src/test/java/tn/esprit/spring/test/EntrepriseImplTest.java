@@ -32,8 +32,8 @@ import tn.esprit.spring.services.IEntrepriseService;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest (classes={TimesheetSpringBootCoreDataJpaMvcRest1Application.class})
-public class TimesheetSpringBootCoreDataJpaMvcRest1ApplicationTests {
+@SpringBootTest 
+public class EntrepriseImplTest {
 	private static final Logger l = Logger.getLogger(EntrepriseServiceImpl.class);
 
  
