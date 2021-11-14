@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tn.esprit.spring.entities.Departement;
-import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.Entreprise;
 import tn.esprit.spring.repository.DepartementRepository;
 import tn.esprit.spring.repository.EntrepriseRepository;
@@ -32,38 +31,49 @@ public class EntrepriseServiceImpl implements IEntrepriseService {
 	}
 	
 	public void affecterDepartementAEntreprise(int depId, int entrepriseId) {
-		
-				Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).get();
-				Departement depManagedEntity = deptRepoistory.findById(depId).get();
-				
-				depManagedEntity.setEntreprise(entrepriseManagedEntity);
-				deptRepoistory.save(depManagedEntity);
-		
+			
+		if (entrepriseRepoistory.findById(entrepriseId).isPresent() && deptRepoistory.findById(depId).isPresent()) {
+			Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).get();
+			Departement depManagedEntity = deptRepoistory.findById(depId).get();
+
+			depManagedEntity.setEntreprise(entrepriseManagedEntity);
+			deptRepoistory.save(depManagedEntity);
+		}
 	}
 	
 	public List<String> getAllDepartementsNamesByEntreprise(int entrepriseId) {
-		Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).get();
-		List<String> depNames = new ArrayList<>();
-		for(Departement dep : entrepriseManagedEntity.getDepartements()){
-			depNames.add(dep.getName());
+		if (entrepriseRepoistory.findById(entrepriseId).isPresent()) {
+			Entreprise entrepriseManagedEntity = entrepriseRepoistory.findById(entrepriseId).get();
+			List<String> depNames = new ArrayList<>();
+			for (Departement dep : entrepriseManagedEntity.getDepartements()) {
+				depNames.add(dep.getName());
+			}
+
+			return depNames;
 		}
-		
-		return depNames;
+		return null;
 	}
 
 	@Transactional
 	public void deleteEntrepriseById(int entrepriseId) {
-		entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());	
+		if (entrepriseRepoistory.findById(entrepriseId).isPresent()) {
+			entrepriseRepoistory.delete(entrepriseRepoistory.findById(entrepriseId).get());
+		}
 	}
 
 	@Transactional
 	public void deleteDepartementById(int depId) {
-		deptRepoistory.delete(deptRepoistory.findById(depId).get());	
+		if (deptRepoistory.findById(depId).isPresent()) {
+			deptRepoistory.delete(deptRepoistory.findById(depId).get());
+		}
 	}
 
 
 	public Entreprise getEntrepriseById(int entrepriseId) {
-		return entrepriseRepoistory.findById(entrepriseId).get();	
+		if (entrepriseRepoistory.findById(entrepriseId).isPresent()) {
+			return entrepriseRepoistory.findById(entrepriseId).get();
+		}
+		return null;
 	}
 
 }

@@ -61,11 +61,8 @@ public class TimesheetPK implements Serializable {
 			return false;
 		TimesheetPK other = (TimesheetPK) obj;
 		if (dateDebut == null) {
-			if (other.dateDebut != null)
+			if (other.dateDebut != null || (!dateDebut.equals(other.dateDebut)))
 				return false;
-		} else if  (!dateDebut.equals(other.dateDebut)) {
-			return false;
-		}
 		if (dateFin == null) {
 			if (other.dateFin != null)
 				return false;
