@@ -63,6 +63,7 @@ public class TimesheetPK implements Serializable {
 		if (dateDebut == null) {
 			if (other.dateDebut != null || (!dateDebut.equals(other.dateDebut)))
 				return false;
+		} 
 		if (dateFin == null) {
 			if (other.dateFin != null)
 				return false;
