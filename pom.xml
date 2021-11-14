@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>tn.esprit.spring</groupId>
 	<artifactId>Timesheet</artifactId>
-	<version>3.0</version>
+	<version>4.1</version>
 	<packaging>jar</packaging>
 	<name>Timesheet-spring-boot-core-data-jpa-mvc-REST-1</name>
 	<description>Timesheet-spring-boot-core-data-jpa-mvc-REST-1</description>
@@ -72,7 +72,7 @@
 			        <artifactId>maven-compiler-plugin</artifactId>
 			        <version>3.1</version>
 				        <configuration>
-				           		 <fork>true</fork>
+				           		
 				        		<executable>C:\Program Files\Java\jdk1.8.0_211\bin\javac.exe</executable>
 				   		 </configuration>
 				</plugin>
