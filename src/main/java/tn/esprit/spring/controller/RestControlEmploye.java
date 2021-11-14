@@ -1,6 +1,5 @@
 package tn.esprit.spring.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -37,8 +36,6 @@ public class RestControlEmploye {
 
 	
 	// http://localhost:8081/SpringMVC/servlet/ajouterEmployer
-	//
-	
 	@PostMapping("/ajouterEmployer")
 	@ResponseBody
 	public Employe ajouterEmploye(@RequestBody Employe employe)
@@ -69,6 +66,7 @@ public class RestControlEmploye {
 	}
 
 	// http://localhost:8081/SpringMVC/servlet/ajouterContrat
+
 	@PostMapping("/ajouterContrat")
 	@ResponseBody
 	public int ajouterContrat(@RequestBody Contrat contrat) {
@@ -128,12 +126,13 @@ public class RestControlEmploye {
     @GetMapping(value = "getAllEmployeByEntreprise/{identreprise}")
     @ResponseBody
 	public List<Employe> getAllEmployeByEntreprise(@PathVariable("identreprise") int identreprise) {
-    	Optional<Entreprise> entreprise=ientrepriseservice.getEntrepriseById(identreprise);
-		List<Employe> employes = new ArrayList<>();
+    	
+    	Optional<Entreprise> entreprise = ientrepriseservice.getEntrepriseById(identreprise);
     	if(entreprise.isPresent()) {
-    		employes = iemployeservice.getAllEmployeByEntreprise(entreprise.get());
-		}
-	    return employes;
+    		return iemployeservice.getAllEmployeByEntreprise(entreprise.get());
+    	}
+    	return null;
+		
 	}
 
  // Modifier email : http://localhost:8081/SpringMVC/servlet/mettreAjourEmailByEmployeIdJPQL/2/newemail
@@ -166,8 +165,6 @@ public class RestControlEmploye {
 		return iemployeservice.getSalaireMoyenByDepartementId(departementId);
 	}
 
-	
-
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, Date dateDebut,
 			Date dateFin) {
 		return iemployeservice.getTimesheetsByMissionAndDate(employe, mission, dateDebut, dateFin);
@@ -182,7 +179,6 @@ public class RestControlEmploye {
 		return iemployeservice.getAllEmployes();
 	}
 
-	
 	
 	
 }
