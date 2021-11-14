@@ -30,8 +30,11 @@ public class EmployeServiceImpl implements IEmployeService {
 	ContratRepository contratRepoistory;
 	@Autowired
 	TimesheetRepository timesheetRepository;
+	
+	private static Employe employe;
 
 	public int ajouterEmploye(Employe employe) {
+		String email = employe.getEmail();
 		employeRepository.save(employe);
 		return employe.getId();
 	}
