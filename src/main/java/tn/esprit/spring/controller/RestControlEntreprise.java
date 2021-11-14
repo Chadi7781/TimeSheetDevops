@@ -1,6 +1,7 @@
 package tn.esprit.spring.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,13 +39,11 @@ public class RestControlEntreprise {
 		return ssiiConsulting.getId();
 	}
 	
-
     @PutMapping(value = "/affecterDepartementAEntreprise/{iddept}/{identreprise}") 
 	public void affecterDepartementAEntreprise(@PathVariable("iddept")int depId, @PathVariable("identreprise")int entrepriseId) {
 		ientrepriseservice.affecterDepartementAEntreprise(depId, entrepriseId);
 	}
     
-
     @DeleteMapping("/deleteEntrepriseById/{identreprise}") 
 	@ResponseBody 
 	public void deleteEntrepriseById(@PathVariable("identreprise")int entrepriseId)
@@ -52,10 +51,9 @@ public class RestControlEntreprise {
 		ientrepriseservice.deleteEntrepriseById(entrepriseId);
 	}
     
-   
     @GetMapping(value = "getEntrepriseById/{identreprise}")
     @ResponseBody
-	public Entreprise getEntrepriseById(@PathVariable("identreprise") int entrepriseId) {
+	public Optional<Entreprise> getEntrepriseById(@PathVariable("identreprise") int entrepriseId) {
 
 		return ientrepriseservice.getEntrepriseById(entrepriseId);
 	}
@@ -68,13 +66,11 @@ public class RestControlEntreprise {
 		return ientrepriseservice.ajouterDepartement(dep);
 	}
 	
- 	
     @GetMapping(value = "getAllDepartementsNamesByEntreprise/{identreprise}")
     @ResponseBody
 	public List<String> getAllDepartementsNamesByEntreprise(@PathVariable("identreprise") int entrepriseId) {
 		return ientrepriseservice.getAllDepartementsNamesByEntreprise(entrepriseId);
 	}
-
 
     @DeleteMapping("/deleteDepartementById/{iddept}") 
 	@ResponseBody 
