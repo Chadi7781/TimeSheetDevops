@@ -67,7 +67,6 @@ public class TimesheetServiceImplTest {
 	public void AjouterDepartementEmployeMission() {
 
 		{
-
 			departement = new Departement("Departement GL");
 			entrepriseService.ajouterDepartement(departement);
 
