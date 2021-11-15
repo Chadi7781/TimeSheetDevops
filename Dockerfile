@@ -1,4 +1,4 @@
 FROM openjdk:8-jdk-alpine
-EXPOSE 8082
-ADD target/Timesheet-spring-boot-core-data-jpa-mvc-REST-1-0.0.8-RELEASE.jar Timesheet-spring-boot-core-data-jpa-mvc-REST-1
-ENTRYPOINT ["java","-jar","/Timesheet-spring-boot-core-data-jpa-mvc-REST-1-0.0.8-RELEASE.jar"]
+EXPOSE 8080
+ADD target/Timesheet-3.0.jar Timesheet-3.0.jar
+ENTRYPOINT ["java","-jar","/Timesheet.jar"]
